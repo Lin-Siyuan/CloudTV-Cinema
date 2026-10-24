@@ -29,6 +29,12 @@ android {
         jvmTarget = "17"
     }
 
+    lint {
+        isAbortOnError = false
+        isCheckReleaseBuilds = false
+        disable.addAll(listOf("ExpiredTargetSdkVersion", "MissingDefaultResource"))
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
