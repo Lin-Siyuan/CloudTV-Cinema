@@ -1,0 +1,36 @@
+# File: .github/workflows/build-apk.yml
+# Compiles your custom Akai CloudTV518 (armeabi-v7a) APK in the cloud for FREE
+# without needing Android Studio installed on your computer!
+
+name: Build Akai CloudTV518 APK (armeabi-v7a)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-32bit-tv-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant Execute Permission for Gradlew
+        run: chmod +x ./gradlew
+
+      - name: Compile Optimized 32-Bit armeabi-v7a Release APK
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Upload Ready-to-Sideload Akai TV APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Akai-CloudTV518-Cinema-armeabi-v7a-APK
+          path: app/build/outputs/apk/release/*.apk
