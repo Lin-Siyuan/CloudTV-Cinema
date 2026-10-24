@@ -53,9 +53,13 @@ dependencies {
     // Core AndroidX
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("androidx.leanback:leanback:1.0.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
+    // Image loading with RGB_565 memory optimization
+    implementation("io.coil-kt:coil:2.6.0")
 
     // Media3 ExoPlayer (Bounded 10s-20s low-memory playback engine)
     implementation("androidx.media3:media3-exoplayer:1.2.1")

@@ -1,7 +1,4 @@
 # File: .github/workflows/build-apk.yml
-# Compiles your custom Akai CloudTV518 (armeabi-v7a) APK in the cloud for FREE
-# without needing Android Studio installed on your computer!
-
 name: Build Akai CloudTV518 APK (armeabi-v7a)
 
 on:
@@ -21,13 +18,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
-      - name: Grant Execute Permission for Gradlew
-        run: chmod +x ./gradlew
+      - name: Setup Gradle 8.6 Directly (No ./gradlew binary required)
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.6'
 
       - name: Compile Optimized 32-Bit armeabi-v7a Release APK
-        run: ./gradlew assembleRelease --no-daemon
+        run: gradle assembleRelease --no-daemon
 
       - name: Upload Ready-to-Sideload Akai TV APK
         uses: actions/upload-artifact@v4

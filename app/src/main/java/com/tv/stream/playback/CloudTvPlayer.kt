@@ -52,6 +52,19 @@ class CloudTvPlayer(
         executeStream()
     }
 
+    fun switchManualSource(index: Int) {
+        if (index in streamQueue.indices) {
+            savedPlaybackPositionMs = exoPlayer?.currentPosition ?: 0L
+            currentIndex = index
+            executeStream()
+        }
+    }
+
+    fun release() {
+        exoPlayer?.release()
+        exoPlayer = null
+    }
+
     private fun executeStream() {
         if (currentIndex >= streamQueue.size) {
             onAllSourcesExhausted()
